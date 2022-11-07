@@ -203,9 +203,6 @@ class Upload extends Component {
             <div>
                 <div className="container-fluid mt-5">
                     <div className="row">
-                        <small className="text-black"><strong>Account
-                            Connected:</strong> {this.state.account.length > 0 ? this.state.account : "Not Connected!"}
-                        </small>
                         <main role="main" className="col-lg-12 d-flex text-center mainCont">
                             <div className="content">
                                 <img className="contImg" src={'https://fileup.infura-ipfs.io/ipfs/' + this.state.logHash} width="400px" alt="null" />
@@ -224,6 +221,7 @@ class Upload extends Component {
                                         <input type="checkbox" onInput={this.changeMode} />
                                         <span className="slider round"></span>
                                     </label>
+                                    <h3>Encryption</h3>
                                 </div>
                             </div>
                         </main>

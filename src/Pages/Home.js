@@ -5,6 +5,9 @@ import File from '../abis/File.json'
 import imgTemp from '../assets/image.PNG'
 import fileTemp from '../assets/file.PNG'
 import add from '../assets/add.png';
+import close from '../assets/close.png';
+import emptybox from '../assets/empty-box.png';
+import floatlogo from '../assets/floatlogo.jpeg';
 import Upload from './Upload'
 import { decode } from 'base64-arraybuffer';
 
@@ -140,7 +143,14 @@ class Home extends Component {
         this.setState({ iv: this.state.file[id].iv });
         this.setState({ id: id });
     };
-
+    res = (e) => {
+        this.setState({ show: !this.state.show });
+        this.setState({ id: '-1' });
+        this.setState({ fileName: '' });
+        this.setState({ fileHash: '' });
+        this.setState({ secret: '' });
+        this.setState({ iv: '' });
+    };
     onButtonClick = () => {
         let r = false;
         if (this.state.secret === '')
@@ -174,8 +184,7 @@ class Home extends Component {
     render() {
         const img_ext = ['jpg', 'jpeg', 'jpe', 'jif', 'jfif', 'jfi', 'png', 'gif', 'webp', 'tiff', 'tif', 
                          'psd', 'raw', 'arw', 'cr2', 'nrw', 'k25', 'bmp', 'dib', 'heif', 'heic', 'ind', 
-                         'indd', 'indt', 'jp2', 'j2k', 'jpf', 'jpx', 'jpm', 'mj2', 'svg', 'svgz', 'ai', 
-            'eps'];
+                         'indd', 'indt', 'jp2', 'j2k', 'jpf', 'jpx', 'jpm', 'mj2', 'svg', 'svgz', 'ai', 'eps'];
 
         const files = this.state.file?.map((data, id) => {
             const ext = data.fileName.toLowerCase().split('.')[1];
@@ -202,12 +211,15 @@ class Home extends Component {
         });
         return (
             <div className="container_">
+                <img className="floatlogo" src={floatlogo} alt="Logo" />
                 <div className="fileVcont" style={{
                     zIndex: this.state.show ? 0 : 1
                 }}>
                     <div className="col-sm-8 fileView" style={{
                         opacity: this.state.show ? 0 : 1,
                     }}>
+                        <img src={close} className="close fil" alt="close" height="55px" onClick={this.res} />
+
                         <div className="file_con">
                             {this.state.fileName}
                             <button onClick={this.onButtonClick}>
@@ -218,6 +230,7 @@ class Home extends Component {
                 </div>
                 <div className="acc_" style={{ display: this.state.pop }}>
                     <div className="col-sm-8 upload_con">
+                        <img src={close} className="close up" alt="close" height="55px" onClick={this.handleClick} />
                         <Upload></Upload>
                     </div>
                 </div>
@@ -231,11 +244,13 @@ class Home extends Component {
                         </small>
                     </li>
                 </ul>
-                <div className="row">
-                    <div className="col-sm-4">.col-sm-4</div>
+                <div className="row cont">
                     <div className="col-sm-8 fileCont">
                         <div className="fileFocus">
-                            {files}
+                            {this.state.file?.length > 0 ?
+                                files :
+                                <img src={emptybox} className="empty" alt="empty" />
+                                }
                         </div>
                     </div>
                 </div>

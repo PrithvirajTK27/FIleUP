@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Web3 from 'web3';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Upload from "../Pages/Upload";
 import Home from "../Pages/Home";
 class App extends Component {
     constructor(props) {
@@ -30,11 +29,10 @@ class App extends Component {
     }
   render() {
     return (
-        <div>
+        <div id="in">
             <BrowserRouter>
                 <Routes>
-                    <Route path="home" element={<Home />} />
-                    <Route path="upload" element={<Upload />} />
+                    <Route path="/" element={<Home />} />
                 </Routes>
             </BrowserRouter>
         </div>
